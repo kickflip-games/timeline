@@ -1,0 +1,21 @@
+.end {
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  text-align: center;
+  gap: 0.6rem;
+}
+
+.end h2,
+.end p {
+  margin: 0;
+}
+
+.actions {
+  margin-top: 0.8rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}

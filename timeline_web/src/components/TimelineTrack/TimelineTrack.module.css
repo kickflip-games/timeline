@@ -1,0 +1,9 @@
+.track {
+  display: inline-flex;
+  align-items: center;
+}
+
+.segment {
+  display: inline-flex;
+  align-items: center;
+}

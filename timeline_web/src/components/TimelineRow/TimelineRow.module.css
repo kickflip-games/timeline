@@ -1,0 +1,22 @@
+.wrap {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+  color: #f6ddc1;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.viewportWrap {
+  width: 100%;
+}
+
+.empty {
+  margin: 0;
+  opacity: 0.85;
+}

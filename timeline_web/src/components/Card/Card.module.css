@@ -1,0 +1,43 @@
+.card {
+  width: min(270px, 85vw);
+  min-height: 168px;
+  padding: 0.9rem;
+  border-radius: 0.8rem;
+  background: linear-gradient(160deg, #6b2d2d, #3a1f1f);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  color: #fdfcf9;
+  display: grid;
+  gap: 0.5rem;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.description {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  opacity: 0.9;
+  word-wrap: break-word;
+}
+
+.year {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.correct {
+  box-shadow: 0 0 0 2px rgba(122, 222, 136, 0.8), 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.incorrect {
+  box-shadow: 0 0 0 2px rgba(240, 107, 107, 0.86), 0 12px 24px rgba(0, 0, 0, 0.3);
+}

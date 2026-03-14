@@ -12,3 +12,20 @@ Game for Ludum Dare 53
 
 * Web scraping tools in the python src dir: `timeline_data_generator`
 * Unity src in `timeline` dir
+
+## Web Deployment
+
+The TypeScript web app in `timeline_web` is configured to deploy with GitHub Pages through the workflow at `.github/workflows/deploy-timeline-web.yml`.
+
+The workflow:
+
+* installs dependencies from `timeline_web/package-lock.json`
+* builds the Vite app from `timeline_web`
+* deploys `timeline_web/dist` with the official GitHub Pages actions
+
+Repository settings needed on GitHub:
+
+* go to Settings > Pages
+* set Source to GitHub Actions
+
+The Vite config automatically uses `/timeline/` as the base path when the app is built in GitHub Actions for this repository, while keeping `/` for local development.

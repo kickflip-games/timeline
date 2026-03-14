@@ -1,0 +1,59 @@
+.marker {
+  min-height: 6.1rem;
+  padding: 0 10px;
+  background: transparent;
+  border: 0;
+  display: grid;
+  place-items: start center;
+  cursor: pointer;
+  opacity: 0.72;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.tick {
+  width: 4px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(250, 220, 160, 0.75);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.marker:hover:not(:disabled) {
+  opacity: 0.95;
+}
+
+.selected {
+  opacity: 1;
+  transform: translateY(-2px) scale(1.06);
+}
+
+.hovered {
+  opacity: 1;
+  transform: translateY(-2px) scale(1.08);
+}
+
+.selected .tick {
+  background: #ffe9a8;
+  box-shadow: 0 0 12px rgba(255, 213, 126, 0.66);
+  height: 52px;
+}
+
+.hovered .tick {
+  background: #ffefbe;
+  box-shadow: 0 0 16px rgba(255, 221, 149, 0.84);
+  height: 56px;
+}
+
+.correct .tick {
+  background: #96efaa;
+  box-shadow: 0 0 12px rgba(120, 235, 143, 0.65);
+}
+
+.chosenWrong .tick {
+  background: #ff9d9d;
+  box-shadow: 0 0 12px rgba(255, 120, 120, 0.65);
+}
+
+.marker:disabled {
+  cursor: default;
+}
