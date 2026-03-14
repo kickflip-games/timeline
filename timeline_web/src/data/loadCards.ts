@@ -1,4 +1,4 @@
-import rawCards from './cards.json';
+import rawCards from './cards.wikipedia.json';
 import type { TimelineCard } from '../game/types';
 import { normalizeCards } from './normalizeCards';
 

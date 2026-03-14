@@ -305,12 +305,9 @@ function App() {
 
           <section className={styles.footer} aria-label="Footer HUD">
             <HUD
-              deckCount={state.deck.length}
-              discardCount={state.discard.length}
               mistakes={state.mistakes}
               maxMistakes={state.maxMistakes}
               score={state.score}
-              turns={state.turnCount}
               onRestart={restart}
               onMenu={onMenu}
             />

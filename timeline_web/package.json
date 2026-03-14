@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "data:csv-to-json": "node ../timeline_data_generator/scripts/convertCsvToJson.mjs",
+    "data:wikipedia": "node ../timeline_data_generator/scripts/generateWikipediaData.mjs"
   },
   "dependencies": {
     "react": "^19.2.4",

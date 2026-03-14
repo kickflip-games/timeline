@@ -17,6 +17,39 @@ Open the local Vite URL shown in terminal.
 npm run test
 ```
 
+## Data Pipeline
+
+Convert CSV data into the local JSON datasets used by the web app:
+
+```bash
+npm run data:csv-to-json -- --input /absolute/path/to/timeline_data.csv
+```
+
+Script location: `../timeline_data_generator/scripts/convertCsvToJson.mjs`
+
+Default outputs:
+
+- `src/data/cards.json`
+- `src/data/cards.byYear.json`
+- `src/data/cards.byCategory.json`
+
+Generate a Wikipedia-enriched card dataset (summary/image/source backfill):
+
+```bash
+npm run data:wikipedia -- --input src/data/cards.json --output src/data/cards.wikipedia.json --limit 50
+```
+
+Script location: `../timeline_data_generator/scripts/generateWikipediaData.mjs`
+
+Useful flags:
+
+- `--overwrite-details`
+- `--overwrite-image`
+- `--overwrite-source`
+- `--delay-ms 250`
+
+If a card cannot be matched, failures are written to `*.failures.json` next to the output file.
+
 ## Architecture Overview
 
 - `src/game/`: Pure game logic and types. No React imports.
