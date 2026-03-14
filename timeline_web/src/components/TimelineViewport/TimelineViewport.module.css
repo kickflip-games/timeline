@@ -1,10 +1,11 @@
 .viewport {
   width: 100%;
   overflow: hidden;
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: linear-gradient(180deg, rgba(19, 13, 13, 0.86), rgba(11, 8, 8, 0.8));
-  padding: 0.85rem 0.6rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-2);
   touch-action: pan-y;
   cursor: grab;
 }
@@ -12,7 +13,7 @@
 .track {
   display: flex;
   align-items: center;
-  transition: transform 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 

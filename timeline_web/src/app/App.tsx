@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
 import { getRouteForPhase } from './routes';
 import { Card } from '../components/Card/Card';
-import { DiscardStack } from '../components/DiscardStack/DiscardStack';
 import { EndScreen } from '../components/EndScreen/EndScreen';
 import { HUD } from '../components/HUD/HUD';
 import { StartScreen } from '../components/StartScreen/StartScreen';
@@ -26,8 +25,8 @@ function App() {
   const [dragPointerId, setDragPointerId] = useState<number | null>(null);
   const [dragPosition, setDragPosition] = useState<{ x: number; y: number } | null>(null);
   const [dragCardSize, setDragCardSize] = useState<{ width: number; height: number }>({
-    width: 270,
-    height: 168,
+    width: 300,
+    height: 188,
   });
   const [dragOffset, setDragOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [hoveredSlotIndex, setHoveredSlotIndex] = useState<number | null>(null);
@@ -71,6 +70,25 @@ function App() {
         window.clearTimeout(snapTimerRef.current);
       }
     };
+  }, []);
+
+  useEffect(() => {
+    const onPointerDown = (event: PointerEvent) => {
+      const target = (event.target as HTMLElement | null)?.closest('button');
+      if (!target) {
+        return;
+      }
+      const rect = target.getBoundingClientRect();
+      target.style.setProperty('--ripple-x', `${event.clientX - rect.left}px`);
+      target.style.setProperty('--ripple-y', `${event.clientY - rect.top}px`);
+      target.classList.remove('ripple-active');
+      void target.clientWidth;
+      target.classList.add('ripple-active');
+      window.setTimeout(() => target.classList.remove('ripple-active'), 450);
+    };
+
+    window.addEventListener('pointerdown', onPointerDown);
+    return () => window.removeEventListener('pointerdown', onPointerDown);
   }, []);
 
   const isPointInsideHandArea = (x: number, y: number): boolean => {
@@ -211,14 +229,21 @@ function App() {
 
   return (
     <main className={styles.shell}>
-      <div className={styles.backgroundGlow} aria-hidden="true" />
       {route === 'start' ? (
         <StartScreen onStart={startGame} disabled={cards.length === 0} />
       ) : null}
 
       {route === 'game' ? (
         <div className={styles.gameGrid}>
-          <section className={styles.timelineStage}>
+          <section className={styles.header} aria-label="Header">
+            <div className={styles.branding}>
+              <h1>Timeline</h1>
+              <p>Place each event in chronological order.</p>
+            </div>
+            <p className={styles.keyboardHint}>Arrow keys move slot, Enter places card.</p>
+          </section>
+
+          <section className={styles.timelineStage} aria-label="Timeline">
             <TimelineRow
               timeline={state.timeline}
               canInsert={state.phase === 'playing'}
@@ -230,37 +255,33 @@ function App() {
             />
           </section>
 
-          <div className={styles.playRow}>
-            <section ref={handAreaRef} className={styles.hand} aria-label="Current card in hand">
-              <h2>Current Card</h2>
-              {state.currentCard ? (
-                <div
-                  className={styles.draggableCard}
-                  onPointerDown={onCurrentCardPointerDown}
-                  onPointerMove={onCurrentCardPointerMove}
-                  onPointerUp={onCurrentCardPointerUp}
-                  onPointerCancel={onCurrentCardPointerUp}
-                >
-                  <Card
-                    card={state.currentCard}
-                    className={isDragging ? styles.dragSource : undefined}
-                    revealed={state.phase !== 'playing'}
-                    highlighted={
-                      state.lastResolution
-                        ? state.lastResolution.isCorrect
-                          ? 'correct'
-                          : 'incorrect'
-                        : null
-                    }
-                  />
-                </div>
-              ) : (
-                <p className={styles.noCard}>No card in hand</p>
-              )}
-            </section>
-
-            <DiscardStack cards={state.discard} />
-          </div>
+          <section ref={handAreaRef} className={styles.currentCardPanel} aria-label="Current card in hand">
+            <h2>Current Card</h2>
+            {state.currentCard ? (
+              <div
+                className={styles.draggableCard}
+                onPointerDown={onCurrentCardPointerDown}
+                onPointerMove={onCurrentCardPointerMove}
+                onPointerUp={onCurrentCardPointerUp}
+                onPointerCancel={onCurrentCardPointerUp}
+              >
+                <Card
+                  card={state.currentCard}
+                  className={isDragging ? styles.dragSource : undefined}
+                  revealed={state.phase !== 'playing'}
+                  highlighted={
+                    state.lastResolution
+                      ? state.lastResolution.isCorrect
+                        ? 'correct'
+                        : 'incorrect'
+                      : null
+                  }
+                />
+              </div>
+            ) : (
+              <p className={styles.noCard}>No card in hand</p>
+            )}
+          </section>
 
           <section className={styles.resolve} aria-live="polite">
             {state.phase === 'resolved' && state.lastResolution ? (
@@ -275,16 +296,18 @@ function App() {
             ) : null}
           </section>
 
-          <HUD
-            deckCount={state.deck.length}
-            discardCount={state.discard.length}
-            mistakes={state.mistakes}
-            maxMistakes={state.maxMistakes}
-            score={state.score}
-            turns={state.turnCount}
-            onRestart={restart}
-            onMenu={onMenu}
-          />
+          <section className={styles.footer} aria-label="Footer HUD">
+            <HUD
+              deckCount={state.deck.length}
+              discardCount={state.discard.length}
+              mistakes={state.mistakes}
+              maxMistakes={state.maxMistakes}
+              score={state.score}
+              turns={state.turnCount}
+              onRestart={restart}
+              onMenu={onMenu}
+            />
+          </section>
         </div>
       ) : null}
 
@@ -325,7 +348,7 @@ function App() {
             transform: snapAnimation.active
               ? `translate(${snapAnimation.to.x - snapAnimation.from.x}px, ${
                   snapAnimation.to.y - snapAnimation.from.y
-                }px) scale(0.88)`
+                }px) scale(0.9)`
               : 'translate(0, 0) scale(1)',
           }}
           aria-hidden="true"

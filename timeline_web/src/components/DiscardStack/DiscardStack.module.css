@@ -1,11 +1,12 @@
 .stack {
-  border-radius: 0.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(18, 12, 12, 0.74);
-  padding: 0.7rem;
-  min-height: 160px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-2);
+  min-height: 170px;
   width: 100%;
-  max-width: 240px;
+  max-width: 260px;
   min-width: 0;
   overflow: hidden;
 }
@@ -15,40 +16,46 @@
   margin: 0;
 }
 
+.stack h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
 .count {
-  font-size: 0.86rem;
-  opacity: 0.86;
+  font-size: 14px;
+  color: var(--text-secondary);
 }
 
 .preview {
-  margin-top: 0.6rem;
+  margin-top: var(--space-2);
   min-height: 104px;
   position: relative;
 }
 
 .empty {
   margin: 0;
-  font-size: 0.85rem;
-  opacity: 0.75;
+  font-size: 14px;
+  color: var(--text-secondary);
 }
 
 .card {
   position: absolute;
   left: 0;
   right: 0;
-  border-radius: 0.55rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: linear-gradient(170deg, #4f2323, #2e1515);
-  padding: 0.42rem 0.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fafafa;
+  padding: 8px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
 .card p,
 .card span {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 13px;
 }
 
 .card p {
@@ -56,4 +63,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 68%;
+}
+
+.card span {
+  color: var(--accent);
+  font-weight: 500;
 }

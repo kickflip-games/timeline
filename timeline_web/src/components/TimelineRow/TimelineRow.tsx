@@ -30,12 +30,12 @@ type LayoutMetrics = {
 
 const getLayoutMetrics = (viewportWidth: number): LayoutMetrics => {
   if (viewportWidth < 520) {
-    return { cardWidth: 136, slotWidth: 30, gap: 12 };
+    return { cardWidth: 120, slotWidth: 28, gap: 12 };
   }
   if (viewportWidth < 860) {
-    return { cardWidth: 156, slotWidth: 34, gap: 16 };
+    return { cardWidth: 148, slotWidth: 32, gap: 16 };
   }
-  return { cardWidth: 178, slotWidth: 38, gap: 20 };
+  return { cardWidth: 180, slotWidth: 36, gap: 20 };
 };
 
 const computeGeometry = (timelineLength: number, metrics: LayoutMetrics) => {

@@ -23,13 +23,21 @@ export const HUD = ({
 }: HUDProps) => {
   return (
     <section className={styles.hud} aria-label="Game information">
-      <p className={styles.deck}>Deck: {deckCount}</p>
-      <p className={styles.discard}>Discard: {discardCount}</p>
       <p>
-        Mistakes: {mistakes}/{maxMistakes}
+        Deck: <strong>{deckCount}</strong>
       </p>
-      <p>Score: {score}</p>
-      <p>Turns: {turns}</p>
+      <p>
+        Discard: <strong>{discardCount}</strong>
+      </p>
+      <p>
+        Mistakes: <strong>{mistakes}</strong>/{maxMistakes}
+      </p>
+      <p>
+        Score: <strong>{score}</strong>
+      </p>
+      <p>
+        Turns: <strong>{turns}</strong>
+      </p>
       <div className={styles.actions}>
         <button type="button" onClick={onRestart}>
           Restart

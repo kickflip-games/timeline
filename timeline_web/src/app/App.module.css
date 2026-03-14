@@ -1,60 +1,76 @@
 .shell {
   min-height: 100vh;
-  color: #f7f2eb;
-  padding: 1rem;
+  color: var(--text-primary);
+  padding: var(--space-3);
   position: relative;
-  overflow-x: hidden;
-  font-family: 'Trebuchet MS', 'Gill Sans', sans-serif;
-  background:
-    radial-gradient(circle at 15% 10%, rgba(146, 61, 61, 0.28), transparent 40%),
-    radial-gradient(circle at 85% 85%, rgba(91, 41, 41, 0.22), transparent 36%),
-    linear-gradient(180deg, #151019 0%, #1b1212 45%, #140d0d 100%);
-}
-
-.backgroundGlow {
-  position: absolute;
-  width: 34rem;
-  height: 34rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(184, 76, 76, 0.2), transparent 62%);
-  top: -12rem;
-  left: -8rem;
-  pointer-events: none;
 }
 
 .gameGrid {
-  max-width: 1180px;
-  width: min(100%, 1180px);
+  max-width: 1240px;
   margin: 0 auto;
   display: grid;
-  gap: 1.1rem;
-  position: relative;
-  z-index: 1;
-  padding-top: 1rem;
+  gap: var(--space-3);
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+}
+
+.header {
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-2) var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.branding {
+  display: grid;
+  gap: 6px;
+}
+
+.branding h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.branding p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.keyboardHint {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 .timelineStage {
-  margin-top: clamp(1.6rem, 4.5vh, 3rem);
   min-width: 0;
 }
 
-.playRow {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(180px, 240px);
-  gap: 1rem;
-  align-items: start;
-  min-width: 0;
-}
-
-.hand {
+.currentCardPanel {
+  justify-self: center;
+  width: min(100%, 420px);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-2);
   display: grid;
   justify-items: center;
-  gap: 0.6rem;
-  min-width: 0;
+  gap: 12px;
 }
 
-.hand h2 {
+.currentCardPanel h2 {
   margin: 0;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .draggableCard {
@@ -76,14 +92,15 @@
 
 .noCard {
   margin: 0;
-  opacity: 0.8;
+  color: var(--text-secondary);
+  font-size: 14px;
 }
 
 .resolve {
-  min-height: 4rem;
+  min-height: 56px;
   display: grid;
   justify-items: center;
-  gap: 0.5rem;
+  gap: 4px;
 }
 
 .resolve p {
@@ -92,67 +109,63 @@
 }
 
 .autoAdvance {
-  font-size: 0.88rem;
-  opacity: 0.8;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.footer {
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-2);
 }
 
 .dragGhost {
   position: fixed;
   z-index: 100;
   pointer-events: none;
-  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.46));
-  transform: rotate(-1.5deg) scale(1.03);
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.2));
+  transform: scale(1.03);
 }
 
 .snapGhost {
   position: fixed;
   z-index: 101;
   pointer-events: none;
-  transition: transform 260ms cubic-bezier(0.2, 0.68, 0.3, 1);
-  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.42));
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.18));
 }
 
-button {
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  border-radius: 0.6rem;
-  background: linear-gradient(180deg, #5f2727, #3f1b1b);
-  color: #f7f2eb;
-  font-weight: 700;
-  padding: 0.55rem 0.95rem;
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-button:focus-visible {
-  outline: 2px solid #ffd57e;
-  outline-offset: 2px;
-}
-
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .shell {
-    padding: 0.8rem;
+    padding: var(--space-2);
   }
 
   .gameGrid {
-    gap: 0.9rem;
-    padding-top: 0.4rem;
+    gap: var(--space-2);
   }
 
-  .timelineStage {
-    margin-top: 0.8rem;
-  }
-
-  .playRow {
-    grid-template-columns: 1fr;
+  .header {
+    padding: var(--space-2);
   }
 }
 
-@media (max-width: 980px) {
-  .playRow {
-    grid-template-columns: 1fr;
+@media (max-width: 620px) {
+  .shell {
+    padding: var(--space-1);
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .keyboardHint {
+    white-space: normal;
+  }
+
+  .currentCardPanel {
+    width: 100%;
   }
 }
