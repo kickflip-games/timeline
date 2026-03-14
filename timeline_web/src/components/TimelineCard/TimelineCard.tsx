@@ -21,10 +21,13 @@ export const TimelineCard = ({ card, revealed, distance, width, preview = false 
   const opacityByDistance = [1, 0.95, 0.9, 0.84] as const;
   const scale = scaleByDistance[normalizedDistance];
   const opacity = opacityByDistance[normalizedDistance];
+  const hoverDetails = card.description ?? '';
+  const hoverText = hoverDetails.length > 0 ? `${card.title} (${card.year})\n\n${hoverDetails}` : `${card.title} (${card.year})`;
 
   return (
     <article
       className={classes.join(' ')}
+      title={hoverText}
       style={
         {
           width: `${width}px`,

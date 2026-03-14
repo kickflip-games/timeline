@@ -20,6 +20,7 @@ export const DiscardStack = ({ cards }: DiscardStackProps) => {
             className={styles.card}
             style={{ transform: `translateY(${index * 8}px)` }}
             aria-label={`${card.title} in wrong pile`}
+            title={card.description ? `${card.title} (${card.year})\n\n${card.description}` : `${card.title} (${card.year})`}
           >
             <p>{card.title}</p>
             <span>{card.year}</span>

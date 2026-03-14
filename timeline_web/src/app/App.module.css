@@ -5,6 +5,10 @@
   position: relative;
 }
 
+.landscapeGate {
+  display: none;
+}
+
 .gameGrid {
   max-width: 1240px;
   margin: 0 auto;
@@ -181,5 +185,36 @@
 
   .footer {
     padding: 0;
+  }
+}
+
+@media (max-width: 900px) and (orientation: portrait) and (pointer: coarse) {
+  .landscapeGate {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 10px;
+    padding: var(--space-3);
+    background: radial-gradient(circle at top, #f9fafb 0%, #eef2ff 55%, #e5e7eb 100%);
+    text-align: center;
+  }
+
+  .landscapeGate h2,
+  .landscapeGate p {
+    margin: 0;
+  }
+
+  .landscapeGate h2 {
+    font-size: 28px;
+    letter-spacing: 0.02em;
+  }
+
+  .landscapeGate p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 28ch;
   }
 }

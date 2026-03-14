@@ -92,6 +92,22 @@ function App() {
     return () => window.removeEventListener('pointerdown', onPointerDown);
   }, []);
 
+  useEffect(() => {
+    const orientation = window.screen.orientation as ScreenOrientation & {
+      lock?: (orientation: 'portrait' | 'landscape') => Promise<void>;
+    };
+    if (typeof orientation?.lock !== 'function') {
+      return;
+    }
+    if (!window.matchMedia('(pointer: coarse)').matches) {
+      return;
+    }
+
+    orientation.lock('landscape').catch(() => {
+      // Most mobile browsers reject lock unless in fullscreen/PWA mode.
+    });
+  }, []);
+
   const isPointInsideHandArea = (x: number, y: number): boolean => {
     const rect = handAreaRef.current?.getBoundingClientRect();
     if (!rect) {
@@ -230,6 +246,12 @@ function App() {
 
   return (
     <main className={styles.shell}>
+      <section className={styles.landscapeGate} aria-live="polite" aria-label="Landscape orientation required">
+        <h2>Rotate Device</h2>
+        <p>Timeline is optimized for landscape mode on mobile.</p>
+        <p>Turn your phone sideways to continue.</p>
+      </section>
+
       {route === 'start' ? (
         <StartScreen onStart={startGame} disabled={cards.length === 0} />
       ) : null}
