@@ -10,15 +10,11 @@
   margin: 0 auto;
   display: grid;
   gap: var(--space-3);
-  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
 }
 
 .header {
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  padding: var(--space-2) var(--space-3);
+  padding: 0 var(--space-1);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -54,6 +50,13 @@
   min-width: 0;
 }
 
+.interactionRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  align-items: start;
+  gap: var(--space-2);
+}
+
 .currentCardPanel {
   justify-self: center;
   width: min(100%, 420px);
@@ -65,6 +68,11 @@
   display: grid;
   justify-items: center;
   gap: 12px;
+}
+
+.wrongPile {
+  justify-self: end;
+  width: 100%;
 }
 
 .currentCardPanel h2 {
@@ -114,11 +122,7 @@
 }
 
 .footer {
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  padding: var(--space-2);
+  padding: 0 var(--space-1);
 }
 
 .dragGhost {
@@ -146,8 +150,14 @@
     gap: var(--space-2);
   }
 
-  .header {
-    padding: var(--space-2);
+  .interactionRow {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .wrongPile {
+    justify-self: center;
+    max-width: 420px;
   }
 }
 
@@ -167,5 +177,9 @@
 
   .currentCardPanel {
     width: 100%;
+  }
+
+  .footer {
+    padding: 0;
   }
 }

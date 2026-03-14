@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { TimelineCard as TimelineCardType } from '../../game/types';
 import styles from './TimelineCard.module.css';
 
@@ -14,16 +15,29 @@ export const TimelineCard = ({ card, revealed, distance, width, preview = false 
   if (preview) {
     classes.push(styles.preview);
   }
-  if (distance >= 2) {
-    classes.push(styles.distant);
-  } else if (distance >= 1) {
-    classes.push(styles.near);
-  }
+
+  const normalizedDistance = Math.max(0, Math.min(3, distance));
+  const scaleByDistance = [1, 0.9, 0.8, 0.7] as const;
+  const opacityByDistance = [1, 0.95, 0.9, 0.84] as const;
+  const scale = scaleByDistance[normalizedDistance];
+  const opacity = opacityByDistance[normalizedDistance];
 
   return (
-    <article className={classes.join(' ')} style={{ width: `${width}px`, minWidth: `${width}px` }}>
-      <h3 className={styles.title}>{card.title}</h3>
-      <p className={styles.year}>{revealed ? card.year : '????'}</p>
+    <article
+      className={classes.join(' ')}
+      style={
+        {
+          width: `${width}px`,
+          minWidth: `${width}px`,
+          '--focus-scale': scale,
+          '--focus-opacity': opacity,
+        } as CSSProperties
+      }
+    >
+      <div className={styles.surface}>
+        <h3 className={styles.title}>{card.title}</h3>
+        <p className={styles.year}>{revealed ? card.year : '????'}</p>
+      </div>
     </article>
   );
 };

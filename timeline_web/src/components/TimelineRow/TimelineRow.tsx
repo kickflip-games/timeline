@@ -209,6 +209,11 @@ export const TimelineRow = ({
       }
     }
 
+    if (nearestIndex === selectedSlotIndex && Math.abs(dragDelta) > 24) {
+      const direction = dragDelta < 0 ? 1 : -1;
+      nearestIndex = clamp(selectedSlotIndex + direction, 0, geometry.slotCount - 1);
+    }
+
     setSelectedSlotIndex(nearestIndex);
     setDragOffsetX(0);
     setIsDragging(false);

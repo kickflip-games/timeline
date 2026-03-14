@@ -28,7 +28,7 @@ export type GameOptions = {
   deckSubsetSize: number;
   insertOnIncorrect: boolean;
   scoreRule: ScoreRule;
-  randomSeed: number;
+  randomSeed?: number;
 };
 
 export type GameState = {

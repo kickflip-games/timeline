@@ -4,9 +4,9 @@
   background: var(--surface);
   box-shadow: var(--shadow-sm);
   padding: var(--space-2);
-  min-height: 170px;
+  min-height: 190px;
   width: 100%;
-  max-width: 260px;
+  max-width: 280px;
   min-width: 0;
   overflow: hidden;
 }
@@ -28,7 +28,7 @@
 
 .preview {
   margin-top: var(--space-2);
-  min-height: 104px;
+  min-height: 128px;
   position: relative;
 }
 

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
 import { getRouteForPhase } from './routes';
 import { Card } from '../components/Card/Card';
+import { DiscardStack } from '../components/DiscardStack/DiscardStack';
 import { EndScreen } from '../components/EndScreen/EndScreen';
 import { HUD } from '../components/HUD/HUD';
 import { StartScreen } from '../components/StartScreen/StartScreen';
@@ -255,32 +256,38 @@ function App() {
             />
           </section>
 
-          <section ref={handAreaRef} className={styles.currentCardPanel} aria-label="Current card in hand">
-            <h2>Current Card</h2>
-            {state.currentCard ? (
-              <div
-                className={styles.draggableCard}
-                onPointerDown={onCurrentCardPointerDown}
-                onPointerMove={onCurrentCardPointerMove}
-                onPointerUp={onCurrentCardPointerUp}
-                onPointerCancel={onCurrentCardPointerUp}
-              >
-                <Card
-                  card={state.currentCard}
-                  className={isDragging ? styles.dragSource : undefined}
-                  revealed={state.phase !== 'playing'}
-                  highlighted={
-                    state.lastResolution
-                      ? state.lastResolution.isCorrect
-                        ? 'correct'
-                        : 'incorrect'
-                      : null
-                  }
-                />
-              </div>
-            ) : (
-              <p className={styles.noCard}>No card in hand</p>
-            )}
+          <section className={styles.interactionRow}>
+            <section ref={handAreaRef} className={styles.currentCardPanel} aria-label="Current card in hand">
+              <h2>Current Card</h2>
+              {state.currentCard ? (
+                <div
+                  className={styles.draggableCard}
+                  onPointerDown={onCurrentCardPointerDown}
+                  onPointerMove={onCurrentCardPointerMove}
+                  onPointerUp={onCurrentCardPointerUp}
+                  onPointerCancel={onCurrentCardPointerUp}
+                >
+                  <Card
+                    card={state.currentCard}
+                    className={isDragging ? styles.dragSource : undefined}
+                    revealed={state.phase !== 'playing'}
+                    highlighted={
+                      state.lastResolution
+                        ? state.lastResolution.isCorrect
+                          ? 'correct'
+                          : 'incorrect'
+                        : null
+                    }
+                  />
+                </div>
+              ) : (
+                <p className={styles.noCard}>No card in hand</p>
+              )}
+            </section>
+
+            <section className={styles.wrongPile} aria-label="Wrong cards pile">
+              <DiscardStack cards={state.discard} />
+            </section>
           </section>
 
           <section className={styles.resolve} aria-live="polite">

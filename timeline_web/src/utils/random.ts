@@ -1,5 +1,15 @@
 export type RandomFn = () => number;
 
+export const createRandomSeed = (): number => {
+  if (typeof globalThis.crypto !== 'undefined' && typeof globalThis.crypto.getRandomValues === 'function') {
+    const values = new Uint32Array(1);
+    globalThis.crypto.getRandomValues(values);
+    return values[0];
+  }
+
+  return Math.floor(Math.random() * 4294967296) >>> 0;
+};
+
 export const createSeededRandom = (seed: number): RandomFn => {
   let t = seed >>> 0;
   return () => {

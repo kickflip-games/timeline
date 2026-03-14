@@ -1,4 +1,4 @@
-import { createSeededRandom } from '../utils/random';
+import { createRandomSeed, createSeededRandom } from '../utils/random';
 import { shuffle } from '../utils/shuffle';
 import { clamp } from '../utils/clamp';
 import { DEFAULT_GAME_OPTIONS } from './constants';
@@ -37,20 +37,23 @@ export const createGame = (
   options?: Partial<GameOptions>,
 ): GameState => {
   const resolvedOptions = buildGameOptions(options);
-  ensureEnoughCards(cards, resolvedOptions.initialTimelineSize);
+  const seed = resolvedOptions.randomSeed ?? createRandomSeed();
+  const finalizedOptions: GameOptions = { ...resolvedOptions, randomSeed: seed };
 
-  const random = createSeededRandom(resolvedOptions.randomSeed);
+  ensureEnoughCards(cards, finalizedOptions.initialTimelineSize);
+
+  const random = createSeededRandom(seed);
   const shuffledCards = shuffle(cards, random);
-  const deckPool = sanitizeDeck(shuffledCards, resolvedOptions);
+  const deckPool = sanitizeDeck(shuffledCards, finalizedOptions);
 
-  ensureEnoughCards(deckPool, resolvedOptions.initialTimelineSize);
+  ensureEnoughCards(deckPool, finalizedOptions.initialTimelineSize);
 
   const seedCards = deckPool
-    .slice(0, resolvedOptions.initialTimelineSize)
+    .slice(0, finalizedOptions.initialTimelineSize)
     .sort((a, b) => a.year - b.year)
     .map((card): PlacedCard => ({ card, revealed: true }));
 
-  const playableCards = deckPool.slice(resolvedOptions.initialTimelineSize);
+  const playableCards = deckPool.slice(finalizedOptions.initialTimelineSize);
   const { next, rest } = drawNextCard(playableCards);
 
   return {
@@ -64,7 +67,7 @@ export const createGame = (
     lastResolution: null,
     turnCount: 0,
     score: 0,
-    options: resolvedOptions,
+    options: finalizedOptions,
   };
 };
 

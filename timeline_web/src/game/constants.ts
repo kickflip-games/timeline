@@ -6,5 +6,4 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   deckSubsetSize: 30,
   insertOnIncorrect: false,
   scoreRule: 'correct_moves',
-  randomSeed: 53,
 };

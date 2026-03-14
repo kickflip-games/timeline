@@ -1,10 +1,14 @@
 .end {
-  min-height: 60vh;
+  min-height: 70vh;
   display: grid;
   place-items: center;
   align-content: center;
   text-align: center;
-  gap: 0.6rem;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: var(--space-3);
+  border-radius: 12px;
 }
 
 .end h2,
@@ -12,10 +16,19 @@
   margin: 0;
 }
 
+.end h2 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.end p {
+  color: var(--text-secondary);
+}
+
 .actions {
-  margin-top: 0.8rem;
+  margin-top: var(--space-2);
   display: flex;
-  gap: 0.6rem;
+  gap: var(--space-1);
   flex-wrap: wrap;
   justify-content: center;
 }
