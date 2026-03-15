@@ -246,12 +246,6 @@ function App() {
 
   return (
     <main className={styles.shell}>
-      <section className={styles.landscapeGate} aria-live="polite" aria-label="Landscape orientation required">
-        <h2>Rotate Device</h2>
-        <p>Timeline is optimized for landscape mode on mobile.</p>
-        <p>Turn your phone sideways to continue.</p>
-      </section>
-
       {route === 'start' ? (
         <StartScreen onStart={startGame} disabled={cards.length === 0} />
       ) : null}

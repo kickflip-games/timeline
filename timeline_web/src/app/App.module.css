@@ -133,7 +133,8 @@
   filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.18));
 }
 
-@media (max-width: 900px) {
+/* Portrait: single column layout */
+@media (max-width: 900px) and (orientation: portrait) {
   .shell {
     padding: var(--space-2);
   }
@@ -150,10 +151,42 @@
   .wrongPile {
     justify-self: center;
     max-width: 420px;
+    width: 100%;
   }
 }
 
-@media (max-width: 620px) {
+/* Landscape mobile: keep 2-col but compact */
+@media (max-width: 900px) and (orientation: landscape) {
+  .shell {
+    padding: var(--space-1) var(--space-2);
+  }
+
+  .gameGrid {
+    gap: var(--space-1);
+  }
+
+  .interactionRow {
+    grid-template-columns: minmax(0, 1fr) 200px;
+    align-items: start;
+  }
+
+  .currentCardPanel {
+    padding: var(--space-1);
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  .currentCardPanel h2 {
+    font-size: 14px;
+  }
+
+  .wrongPile {
+    width: 100%;
+  }
+}
+
+/* Small portrait phone */
+@media (max-width: 620px) and (orientation: portrait) {
   .shell {
     padding: var(--space-1);
   }
@@ -161,48 +194,24 @@
   .header {
     align-items: flex-start;
     flex-direction: column;
+    gap: 4px;
   }
 
   .keyboardHint {
-    white-space: normal;
+    display: none;
   }
 
   .currentCardPanel {
     width: 100%;
+    padding: var(--space-1);
+    gap: 8px;
+  }
+
+  .currentCardPanel h2 {
+    font-size: 14px;
   }
 
   .footer {
     padding: 0;
-  }
-}
-
-@media (max-width: 900px) and (orientation: portrait) and (pointer: coarse) {
-  .landscapeGate {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: grid;
-    align-content: center;
-    justify-items: center;
-    gap: 10px;
-    padding: var(--space-3);
-    background: radial-gradient(circle at top, #f9fafb 0%, #eef2ff 55%, #e5e7eb 100%);
-    text-align: center;
-  }
-
-  .landscapeGate h2,
-  .landscapeGate p {
-    margin: 0;
-  }
-
-  .landscapeGate h2 {
-    font-size: 28px;
-    letter-spacing: 0.02em;
-  }
-
-  .landscapeGate p {
-    font-size: 16px;
-    color: var(--text-secondary);
-    max-width: 28ch;
   }
 }

@@ -6,6 +6,17 @@
   align-items: center;
 }
 
+@media (pointer: coarse) and (max-width: 620px) {
+  .card {
+    min-height: 100px;
+  }
+
+  .surface {
+    min-height: 100px;
+    padding: 8px;
+  }
+}
+
 .surface {
   min-height: 124px;
   border-radius: 12px;

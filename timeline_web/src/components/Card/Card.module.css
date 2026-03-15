@@ -20,6 +20,19 @@
   }
 }
 
+@media (pointer: coarse) {
+  .card {
+    max-width: 100%;
+  }
+}
+
+@media (pointer: coarse) and (max-width: 620px) {
+  .card {
+    min-height: 120px;
+    padding: var(--space-1);
+  }
+}
+
 .title {
   margin: 0;
   font-size: 18px;

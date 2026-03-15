@@ -11,6 +11,17 @@
   overflow: hidden;
 }
 
+@media (pointer: coarse) {
+  .stack {
+    min-height: 0;
+    max-width: 100%;
+  }
+
+  .preview {
+    min-height: 0;
+  }
+}
+
 .stack h3,
 .count {
   margin: 0;

@@ -137,7 +137,8 @@ export const TimelineRow = ({
     );
   }
 
-  const selectedSlotCenter = geometry.slotCenters[selectedSlotIndex] ?? 0;
+  const focusSlotIndex = hoveredSlotIndex !== null ? hoveredSlotIndex : selectedSlotIndex;
+  const selectedSlotCenter = geometry.slotCenters[focusSlotIndex] ?? geometry.slotCenters[selectedSlotIndex] ?? 0;
   const viewportCenter = viewportWidth / 2;
   const scrollable = geometry.trackWidth > viewportWidth;
   const centeredTrackOffset = (viewportWidth - geometry.trackWidth) / 2;
@@ -265,6 +266,18 @@ export const TimelineRow = ({
             onSelectSlot={setSelectedSlotIndex}
           />
         </TimelineViewport>
+      </div>
+
+      <div className={styles.mobilePlace}>
+        <button
+          type="button"
+          className={styles.placeButton}
+          onClick={() => onSelectInsertion(selectedSlotIndex)}
+          disabled={!canInsert}
+          aria-label={`Place card at position ${selectedSlotIndex + 1}`}
+        >
+          Place Here ({selectedSlotIndex + 1} / {geometry.slotCount})
+        </button>
       </div>
     </section>
   );
