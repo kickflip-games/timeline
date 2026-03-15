@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { TimelineCard as TimelineCardType } from '../../game/types';
+import { formatYear } from '../../utils/formatYear';
 import styles from './TimelineCard.module.css';
 
 type TimelineCardProps = {
@@ -22,7 +23,8 @@ export const TimelineCard = ({ card, revealed, distance, width, preview = false 
   const scale = scaleByDistance[normalizedDistance];
   const opacity = opacityByDistance[normalizedDistance];
   const hoverDetails = card.description ?? '';
-  const hoverText = hoverDetails.length > 0 ? `${card.title} (${card.year})\n\n${hoverDetails}` : `${card.title} (${card.year})`;
+  const displayYear = formatYear(card.year);
+  const hoverText = hoverDetails.length > 0 ? `${card.title} (${displayYear})\n\n${hoverDetails}` : `${card.title} (${displayYear})`;
 
   return (
     <article
@@ -39,7 +41,7 @@ export const TimelineCard = ({ card, revealed, distance, width, preview = false 
     >
       <div className={styles.surface}>
         <h3 className={styles.title}>{card.title}</h3>
-        <p className={styles.year}>{revealed ? card.year : '????'}</p>
+        <p className={styles.year}>{revealed ? displayYear : '????'}</p>
       </div>
     </article>
   );

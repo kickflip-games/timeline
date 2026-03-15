@@ -64,25 +64,13 @@
 .currentCardPanel {
   justify-self: center;
   width: min(100%, 420px);
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  padding: var(--space-2);
   display: grid;
   justify-items: center;
-  gap: 12px;
 }
 
 .wrongPile {
   justify-self: end;
   width: 100%;
-}
-
-.currentCardPanel h2 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
 }
 
 .draggableCard {

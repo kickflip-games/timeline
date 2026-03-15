@@ -1,4 +1,5 @@
 import type { TimelineCard } from '../../game/types';
+import { formatYear } from '../../utils/formatYear';
 import styles from './Card.module.css';
 
 type CardProps = {
@@ -20,7 +21,7 @@ export const Card = ({ card, revealed = true, highlighted = null, className }: C
   return (
     <article className={classes.filter(Boolean).join(' ')}>
       <h3 className={styles.title}>{card.title}</h3>
-      <p className={`${styles.year} ${revealed ? styles.revealedYear : ''}`}>{revealed ? card.year : '????'}</p>
+      <p className={`${styles.year} ${revealed ? styles.revealedYear : ''}`}>{revealed ? formatYear(card.year) : '????'}</p>
     </article>
   );
 };

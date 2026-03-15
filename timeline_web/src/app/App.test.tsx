@@ -9,7 +9,7 @@ describe('App smoke flow', () => {
     render(<App />);
 
     await user.click(await screen.findByRole('button', { name: /play/i }));
-    expect(await screen.findByRole('heading', { name: /current card/i })).toBeInTheDocument();
+    expect(await screen.findByLabelText(/current card in hand/i)).toBeInTheDocument();
 
     await user.keyboard('{Enter}');
 
@@ -24,7 +24,7 @@ describe('App smoke flow', () => {
     render(<App />);
 
     await user.click(await screen.findByRole('button', { name: /play/i }));
-    expect(await screen.findByRole('heading', { name: /current card/i })).toBeInTheDocument();
+    expect(await screen.findByLabelText(/current card in hand/i)).toBeInTheDocument();
 
     expect(screen.getByLabelText(/select insertion position 1/i)).toHaveAttribute('aria-current', 'true');
 

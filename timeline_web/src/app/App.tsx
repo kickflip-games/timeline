@@ -280,7 +280,6 @@ function App() {
 
           <section className={styles.interactionRow}>
             <section ref={handAreaRef} className={styles.currentCardPanel} aria-label="Current card in hand">
-              <h2>Current Card</h2>
               {state.currentCard ? (
                 <div
                   className={styles.draggableCard}
